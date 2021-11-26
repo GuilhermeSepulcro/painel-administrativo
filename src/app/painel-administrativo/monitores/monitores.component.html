@@ -4,12 +4,12 @@
       <h4>Monitores</h4>
     </div>
     <div class="float-right">
-      <button type="button" class="btn btn-primary" routerLink="novo">Adicionar monitor</button>
-      <button type="button" class="btn btn-secondary">Atualizar</button>
+      <button type="button" class="btn btn-primary" routerLink="configuracao">Adicionar monitor</button>
+      <button type="button" class="btn btn-secondary" (click)="onRefresh()">Atualizar</button>
     </div>
   </div>
   <div class="card-body">
-    <table class="table table-hover">
+    <table class="table table-hover" *ngIf="painel$ | async as painel; else loadingError">
       <thead>
         <tr>
           <th>#</th>
@@ -36,8 +36,13 @@
       </tbody>
     </table>
 
-    <ng-template #loading>
-      <span>Carregando Cursos...</span>
+    <ng-template #loadingError>
+      <div *ngIf="error$ | async; else loading" >
+        Erro ao carregar monitores. Tente novamente mais tarde.
+      </div>
+      <ng-template #loading>
+        <span>Carregando Monitores...</span>
+      </ng-template>
     </ng-template>
 
   </div>

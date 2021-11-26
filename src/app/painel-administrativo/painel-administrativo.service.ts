@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { PainelAdministrativo } from './painel-administrativo';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
@@ -7,7 +8,7 @@ import { HttpClient } from '@angular/common/http'
 })
 export class PainelAdministrativoService {
 
-  private readonly API = "http://localhost:3000/chamadas"
+  private readonly API = `${environment.API}chamadas`
 
   constructor(
     private http: HttpClient
