@@ -1,3 +1,52 @@
-<p>
-  monitores works!
-</p>
+<div class="card mt-3">
+  <div class="card-header">
+    <div class="float-left">
+      <h4>Monitores</h4>
+    </div>
+    <div class="float-right">
+      <button type="button" class="btn btn-primary" routerLink="novo">Adicionar monitor</button>
+      <button type="button" class="btn btn-secondary">Atualizar</button>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Monitor</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let painel of painel" >
+          <td>{{ painel.id }}</td>
+          <td>{{ painel.nome }}</td>
+          <td>
+            <span class="float-right">
+              <button class="btn btn-outline-warning mb-1 btn-sm">
+                Editar
+              </button>
+
+              <button class="btn btn-outline-danger mb-1 btn-sm">
+                Remover
+              </button>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #loading>
+      <span>Carregando Cursos...</span>
+    </ng-template>
+
+  </div>
+</div>
+
+<ng-template #deleteModal>
+  <div class="modal-body text-center">
+    <p>Tem certeza que deseja remover esse curso?</p>
+    <button type="button" class="btn btn-default">Sim</button>
+    <button type="button" class="btn btn-primary">Não</button>
+  </div>
+</ng-template>
