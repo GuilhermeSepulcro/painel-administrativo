@@ -3,6 +3,7 @@ import { PainelAdministrativoService } from './../painel-administrativo.service'
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-configuracao',
@@ -17,13 +18,17 @@ export class ConfiguracaoComponent implements OnInit {
     private fb: FormBuilder,
     private service: PainelAdministrativoService,
     private modal: AlertModalService,
-    private location: Location
+    private location: Location,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
+    const monitor = this.route.snapshot.data['monitor'];
+
     this.form = this.fb.group({
+      id: [monitor.id],
       nome: [
-        null,
+        monitor.nome,
         [
           Validators.required,
           Validators.minLength(3),
@@ -42,14 +47,24 @@ export class ConfiguracaoComponent implements OnInit {
     console.log(this.form.value);
     if (this.form.valid) {
       console.log('submit');
-      this.service.criar(this.form.value).subscribe(
+
+      let msgSuccess = 'Monitor adicionado com sucesso!';
+      let msgError = 'Erro ao adicionar monitor, tente novamente!';
+      if(this.form.value.id){
+        msgSuccess = 'Monitor atualizado com sucesso!';
+        msgError = 'Erro ao atualizar monitor, tente novamente!';
+      }
+
+      this.service.salvar(this.form.value).subscribe(
         success => {
-          this.modal.mostrarAlertaSuccess('Monitor adicionado com sucesso!')
-          this.location.back();
+          this.modal.mostrarAlertaSuccess(msgSuccess);
+            this.location.back();
         },
-        error => this.modal.mostrarAlertaDanger('Erro ao adicionar curso, tente novamente!'),
-        () => console.log('request completo')
-      )
+        error => {
+          this.modal.mostrarAlertaDanger(msgError)
+        }
+      );
+
     }
   }
 
