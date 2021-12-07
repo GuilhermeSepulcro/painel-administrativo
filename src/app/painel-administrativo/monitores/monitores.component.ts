@@ -1,3 +1,4 @@
+import { AlertModalService } from './../../shared/alert-modal.service';
 import { AlertModalComponent } from './../../shared/alert-modal/alert-modal.component';
 import { PainelAdministrativoService } from './../painel-administrativo.service';
 import { Component, OnInit } from '@angular/core';
@@ -16,14 +17,15 @@ export class MonitoresComponent implements OnInit {
 
   // painel!: PainelAdministrativo[];
 
-  bsModalRef?: BsModalRef;
+  // bsModalRef?: BsModalRef;
 
   painel$!: Observable<PainelAdministrativo[]>
   error$ = new Subject<boolean>()
 
   constructor(
     private service: PainelAdministrativoService,
-    private modalService: BsModalService
+    // private modalService: BsModalService
+    private alertService: AlertModalService
     ) { }
 
   ngOnInit() {
@@ -58,10 +60,7 @@ export class MonitoresComponent implements OnInit {
   }
 
   handleError(){
-    this.bsModalRef = this.modalService.show(AlertModalComponent);
-    this.bsModalRef.content.tipoAlertaErro = 'danger';
-    this.bsModalRef.content.alertaErro = 'Erro ao carregar monitores. Tente novamente mais tarde.';
-
+    this.alertService.mostrarAlertaDanger('Erro ao carregar monitores. Tente novamente mais tarde.')
   }
 
 }
