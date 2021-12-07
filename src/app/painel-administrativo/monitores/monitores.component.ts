@@ -1,8 +1,10 @@
+import { AlertModalComponent } from './../../shared/alert-modal/alert-modal.component';
 import { PainelAdministrativoService } from './../painel-administrativo.service';
 import { Component, OnInit } from '@angular/core';
 import { PainelAdministrativo } from '../painel-administrativo';
 import { empty, Observable, pipe, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators'
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-monitores',
@@ -14,10 +16,15 @@ export class MonitoresComponent implements OnInit {
 
   // painel!: PainelAdministrativo[];
 
+  bsModalRef?: BsModalRef;
+
   painel$!: Observable<PainelAdministrativo[]>
   error$ = new Subject<boolean>()
 
-  constructor(private service: PainelAdministrativoService) { }
+  constructor(
+    private service: PainelAdministrativoService,
+    private modalService: BsModalService
+    ) { }
 
   ngOnInit() {
     // this.service.listarMonitoresAtivos()
@@ -30,7 +37,8 @@ export class MonitoresComponent implements OnInit {
     .pipe(
       catchError(error => {
         console.error(error)
-        this.error$.next(true);
+        // this.error$.next(true);
+        this.handleError();
         return empty();
       })
     );
@@ -47,6 +55,13 @@ export class MonitoresComponent implements OnInit {
       // error => console.error(error),
       // () => console.log('Observable completo!')
     )
+  }
+
+  handleError(){
+    this.bsModalRef = this.modalService.show(AlertModalComponent);
+    this.bsModalRef.content.tipoAlertaErro = 'danger';
+    this.bsModalRef.content.alertaErro = 'Erro ao carregar monitores. Tente novamente mais tarde.';
+
   }
 
 }
