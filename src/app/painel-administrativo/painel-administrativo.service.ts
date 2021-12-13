@@ -36,7 +36,10 @@ export class PainelAdministrativoService {
       return this.update(monitor);
     }
     return this.criar(monitor)
+  }
 
+  remover(id: any){
+    return this.http.delete(`${this.API}/${id}`).pipe(take(1));
   }
 
 }

@@ -1,7 +1,7 @@
 import { AlertModalService } from './../../shared/alert-modal.service';
 import { AlertModalComponent } from './../../shared/alert-modal/alert-modal.component';
 import { PainelAdministrativoService } from './../painel-administrativo.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PainelAdministrativo } from '../painel-administrativo';
 import { empty, Observable, pipe, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -19,12 +19,17 @@ export class MonitoresComponent implements OnInit {
 
   // bsModalRef?: BsModalRef;
 
+  deleteModalRef!: BsModalRef;
+  @ViewChild('deleteModal') deleteModal: any;
+
   painel$!: Observable<PainelAdministrativo[]>;
   error$ = new Subject<boolean>();
 
+  monitorSelecionado!: PainelAdministrativo;
+
   constructor(
     private service: PainelAdministrativoService,
-    // private modalService: BsModalService
+    private modalService: BsModalService,
     private alertService: AlertModalService,
     private router: Router,
     private route: ActivatedRoute
@@ -68,5 +73,28 @@ export class MonitoresComponent implements OnInit {
 
   onEdit(id: any) {
     this.router.navigate(['editar', id], { relativeTo: this.route });
+  }
+
+  onDelete(painel: any){
+    this.monitorSelecionado = painel
+    this.deleteModalRef = this.modalService.show(this.deleteModal, {class: 'modal-sm'});
+  }
+
+  onConfirmDelete(){
+    this.service.remover(this.monitorSelecionado.id)
+    .subscribe(
+      success => {
+        this.onRefresh();
+        this.deleteModalRef.hide();
+      },
+      error => {
+        this.alertService.mostrarAlertaDanger('Erro ao remover monitor. Tente novamente mais tarde.')
+        this.deleteModalRef.hide();
+      }
+    );
+  }
+
+  onDeclineDelete(){
+    this.deleteModalRef.hide();
   }
 }
