@@ -1,3 +1,4 @@
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { AlertModalComponent } from './alert-modal/alert-modal.component';
 import { Injectable } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
@@ -30,5 +31,9 @@ export class AlertModalService {
 
   mostrarAlertaSuccess(mensagem: string){
     this.mostrarAlerta(mensagem, TiposAlerta.SUCCESS, 3000)
+  }
+
+  mostrarConfirmacao(titulo: string, mensagem: string, okTxt?: string, cancelarTxt?: string ){
+    const bsModalRef: BsModalRef = this.modalService.show(ConfirmModalComponent);
   }
 }

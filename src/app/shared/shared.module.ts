@@ -1,3 +1,4 @@
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { AlertModalComponent } from './alert-modal/alert-modal.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -6,7 +7,8 @@ import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
-    AlertModalComponent
+    AlertModalComponent,
+    ConfirmModalComponent
   ],
   imports: [
     CommonModule
@@ -15,7 +17,8 @@ import { CommonModule } from '@angular/common';
     AlertModalComponent
   ],
   entryComponents: [
-    AlertModalComponent
+    AlertModalComponent,
+    ConfirmModalComponent
   ]
 })
 export class SharedModule { }
