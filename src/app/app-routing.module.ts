@@ -5,7 +5,7 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'painel-administrativo' },
   {
     path: 'painel-administrativo',
-    loadChildren: () => import('./painel-administrativo/painel-administrativo.module').then(m => m.PainelAdministrativoModule)
+    loadChildren: () => import('./monitores/monitores.module').then(m => m.MonitoresModule)
   }
 ];
 

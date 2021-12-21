@@ -1,21 +1,21 @@
+import { ConfigurarComponent } from './configurar/configuracao.component';
+import { ListarComponent } from './listar/listar.component';
 import { MonitorResolverGuard } from './guards/monitor-resolver.guard';
-import { ConfiguracaoComponent } from './configuracao/configuracao.component';
-import { MonitoresComponent } from './monitores/monitores.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', component: MonitoresComponent },
+  { path: '', component: ListarComponent },
   {
     path: 'configuracao',
-    component: ConfiguracaoComponent,
+    component: ConfigurarComponent,
     resolve: {
       monitor: MonitorResolverGuard,
     },
   },
   {
     path: 'editar/:id',
-    component: ConfiguracaoComponent,
+    component: ConfigurarComponent,
     resolve: {
       monitor: MonitorResolverGuard,
     },
@@ -26,4 +26,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PainelAdministrativoRoutingModule {}
+export class MonitoresRoutingModule {}

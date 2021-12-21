@@ -1,5 +1,5 @@
+import { MonitoresService } from './../monitores.service';
 import { AlertModalService } from './../../shared/alert-modal.service';
-import { PainelAdministrativoService } from './../painel-administrativo.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
@@ -7,16 +7,16 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-configuracao',
-  templateUrl: './configuracao.component.html',
-  styleUrls: ['./configuracao.component.css'],
+  templateUrl: './configurar.component.html',
+  styleUrls: [],
 })
-export class ConfiguracaoComponent implements OnInit {
+export class ConfigurarComponent implements OnInit {
   form!: FormGroup;
   submitted = false;
 
   constructor(
     private fb: FormBuilder,
-    private service: PainelAdministrativoService,
+    private service: MonitoresService,
     private modal: AlertModalService,
     private location: Location,
     private route: ActivatedRoute

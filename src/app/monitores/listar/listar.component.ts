@@ -1,6 +1,6 @@
-import { AlertModalService } from './../../shared/alert-modal.service';
-import { AlertModalComponent } from './../../shared/alert-modal/alert-modal.component';
-import { PainelAdministrativoService } from './../painel-administrativo.service';
+import { MonitoresService } from './../monitores.service';
+import { AlertModalService } from '../../shared/alert-modal.service';
+import { AlertModalComponent } from '../../shared/alert-modal/alert-modal.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PainelAdministrativo } from '../painel-administrativo';
 import { empty, Observable, pipe, Subject } from 'rxjs';
@@ -10,11 +10,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-monitores',
-  templateUrl: './monitores.component.html',
-  styleUrls: ['./monitores.component.css'],
+  templateUrl: './listar.component.html',
+  styleUrls: [],
   preserveWhitespaces: true,
 })
-export class MonitoresComponent implements OnInit {
+export class ListarComponent implements OnInit {
   // painel!: PainelAdministrativo[];
 
   // bsModalRef?: BsModalRef;
@@ -28,7 +28,7 @@ export class MonitoresComponent implements OnInit {
   monitorSelecionado!: PainelAdministrativo;
 
   constructor(
-    private service: PainelAdministrativoService,
+    private service: MonitoresService,
     private modalService: BsModalService,
     private alertService: AlertModalService,
     private router: Router,

@@ -7,7 +7,7 @@ import { take } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class PainelAdministrativoService {
+export class MonitoresService {
 
   private readonly API = `${environment.API}chamadas`
 
