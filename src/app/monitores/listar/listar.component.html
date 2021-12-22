@@ -7,11 +7,11 @@
       <button
         type="button"
         class="btn btn-primary"
-        [routerLink]="['configuracao']"
+        [routerLink]="['configurar']"
       >
         Adicionar monitor
       </button>
-      <button type="button" class="btn btn-secondary" (click)="onRefresh()">
+      <button type="button" class="btn btn-secondary" (click)="atualizar()">
         Atualizar
       </button>
     </div>
@@ -19,7 +19,7 @@
   <div class="card-body">
     <table
       class="table table-hover"
-      *ngIf="painel$ | async as painel; else loading"
+      *ngIf="monitores$ | async as painel; else loading"
     >
       <thead>
         <tr>
@@ -36,14 +36,14 @@
             <span class="float-right">
               <button
                 class="btn btn-outline-warning mb-1 btn-sm"
-                (click)="onEdit(painel.id)"
+                (click)="editar(painel.id)"
               >
                 Editar
               </button>
 
               <button
                 class="btn btn-outline-danger mb-1 btn-sm"
-                (click)="onDelete(painel)"
+                (click)="excluir(painel)"
               >
                 Remover
               </button>
@@ -70,7 +70,7 @@
 <ng-template #deleteModal>
   <div class="modal-body text-center">
     <p>Tem certeza que deseja remover esse monitor?</p>
-    <button type="button" class="btn btn-default" (click)="onConfirmDelete()">Sim</button>
-    <button type="button" class="btn btn-primary" (click)="onDeclineDelete()">Não</button>
+    <button type="button" class="btn btn-default" (click)="confirmarExclusao()">Sim</button>
+    <button type="button" class="btn btn-primary" (click)="negarExclusao()">Não</button>
   </div>
 </ng-template>

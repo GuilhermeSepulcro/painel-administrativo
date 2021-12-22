@@ -1,5 +1,5 @@
-import { MonitoresService } from './../monitores.service';
-import { AlertModalService } from './../../shared/alert-modal.service';
+import { MonitoresService } from '../monitores.service';
+import { AlertModalService } from '../../shared/alert-modal.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
@@ -38,11 +38,11 @@ export class ConfigurarComponent implements OnInit {
     });
   }
 
-  hasError(field: string) {
+  possuiError(field: string) {
     return this.form.get(field)?.errors;
   }
 
-  onSubmit() {
+  enviar() {
     this.submitted = true;
     console.log(this.form.value);
     if (this.form.valid) {
@@ -55,7 +55,7 @@ export class ConfigurarComponent implements OnInit {
         msgError = 'Erro ao atualizar monitor, tente novamente!';
       }
 
-      this.service.salvar(this.form.value).subscribe(
+      this.service.salvarMonitor(this.form.value).subscribe(
         success => {
           this.modal.mostrarAlertaSuccess(msgSuccess);
             this.location.back();
@@ -68,7 +68,7 @@ export class ConfigurarComponent implements OnInit {
     }
   }
 
-  onCancel() {
+  cancelar() {
     this.submitted = false;
     this.form.reset();
   }

@@ -1,5 +1,5 @@
 import { environment } from './../../environments/environment';
-import { PainelAdministrativo } from './painel-administrativo';
+import { monitorModel } from './painel-administrativo-model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { take } from 'rxjs/operators';
@@ -16,29 +16,29 @@ export class MonitoresService {
   ) { }
 
   listarMonitoresAtivos(){
-    return this.http.get<PainelAdministrativo[]>(this.API);
+    return this.http.get<monitorModel[]>(this.API);
   }
 
-  loadByID(id: any){
-    return this.http.get<PainelAdministrativo>(`${this.API}/${id}`).pipe(take(1));
+  obterMonitorPorId(id){
+    return this.http.get<monitorModel>(`${this.API}/${id}`).pipe(take(1));
   }
 
-  criar(monitor: any){
+  incluirMonitor(monitor){
     return this.http.post(this.API, monitor).pipe(take(1));
   }
 
-  update(monitor: any){
+  atualizarMonitor(monitor){
     return this.http.put(`${this.API}/${monitor.id}`, monitor).pipe(take(1))
   }
 
-  salvar(monitor: any){
+  salvarMonitor(monitor){
     if(monitor.id){
-      return this.update(monitor);
+      return this.atualizarMonitor(monitor);
     }
-    return this.criar(monitor)
+    return this.incluirMonitor(monitor)
   }
 
-  remover(id: any){
+  excluirMonitor(id){
     return this.http.delete(`${this.API}/${id}`).pipe(take(1));
   }
 

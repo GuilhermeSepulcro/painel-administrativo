@@ -13,9 +13,9 @@
         id="nome"
         placeholder="Nome do Monitor"
         formControlName="nome"
-        [ngClass]="{ 'is-invalid': submitted && hasError('nome') }"
+        [ngClass]="{ 'is-invalid': submitted && possuiError('nome') }"
       />
-      <div *ngIf="hasError('nome')" class="invalid-feedback">
+      <div *ngIf="possuiError('nome')" class="invalid-feedback">
         <div *ngIf="form.controls.nome.errors?.required">Digitar Nome</div>
         <div *ngIf="form.controls.nome.errors?.minlength">
           No mínimo 3 caracteres
@@ -27,10 +27,10 @@
     </div>
   </div>
   <div style="margin-top: 10px">
-    <button type="submit" class="btn btn-primary" (click)="onSubmit()">
+    <button type="submit" class="btn btn-primary" (click)="enviar()">
       Salvar
     </button>
-    <button type="button" class="btn btn-default" (click)="onCancel()">
+    <button type="button" class="btn btn-default" (click)="cancelar()">
       Cancelar
     </button>
   </div>

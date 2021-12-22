@@ -1,4 +1,4 @@
-import { ConfigurarComponent } from './configurar/configuracao.component';
+import { ConfigurarComponent } from './configurar/configurar.component';
 import { ListarComponent } from './listar/listar.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';

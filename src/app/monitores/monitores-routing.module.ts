@@ -1,4 +1,4 @@
-import { ConfigurarComponent } from './configurar/configuracao.component';
+import { ConfigurarComponent } from './configurar/configurar.component';
 import { ListarComponent } from './listar/listar.component';
 import { MonitorResolverGuard } from './guards/monitor-resolver.guard';
 import { NgModule } from '@angular/core';
@@ -7,7 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   { path: '', component: ListarComponent },
   {
-    path: 'configuracao',
+    path: 'configurar',
     component: ConfigurarComponent,
     resolve: {
       monitor: MonitorResolverGuard,
