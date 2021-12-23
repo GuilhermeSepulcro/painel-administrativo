@@ -1,4 +1,4 @@
-import { monitorModel } from './../painel-administrativo-model';
+import { monitorModel } from '../monitor-model';
 import { MonitoresService } from './../monitores.service';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Resolve, RouterStateSnapshot, UrlTree } from '@angular/router';

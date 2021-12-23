@@ -1,5 +1,5 @@
+import { AlertaModalService } from './../../shared/alerta-modal.service';
 import { MonitoresService } from '../monitores.service';
-import { AlertModalService } from '../../shared/alert-modal.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
@@ -17,7 +17,7 @@ export class ConfigurarComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private service: MonitoresService,
-    private modal: AlertModalService,
+    private modal: AlertaModalService,
     private location: Location,
     private route: ActivatedRoute
   ) {}
@@ -48,20 +48,20 @@ export class ConfigurarComponent implements OnInit {
     if (this.form.valid) {
       console.log('submit');
 
-      let msgSuccess = 'Monitor adicionado com sucesso!';
-      let msgError = 'Erro ao adicionar monitor, tente novamente!';
+      let mensagemSucesso = 'Monitor adicionado com sucesso!';
+      let mensagemErro = 'Erro ao adicionar monitor, tente novamente!';
       if(this.form.value.id){
-        msgSuccess = 'Monitor atualizado com sucesso!';
-        msgError = 'Erro ao atualizar monitor, tente novamente!';
+        mensagemSucesso = 'Monitor atualizado com sucesso!';
+        mensagemErro = 'Erro ao atualizar monitor, tente novamente!';
       }
 
       this.service.salvarMonitor(this.form.value).subscribe(
         success => {
-          this.modal.mostrarAlertaSuccess(msgSuccess);
+          this.modal.mostrarAlertaSucesso(mensagemSucesso);
             this.location.back();
         },
         error => {
-          this.modal.mostrarAlertaDanger(msgError)
+          this.modal.mostrarAlertaErro(mensagemErro)
         }
       );
 

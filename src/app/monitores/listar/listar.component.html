@@ -19,7 +19,7 @@
   <div class="card-body">
     <table
       class="table table-hover"
-      *ngIf="monitores$ | async as painel; else loading"
+      *ngIf="monitores$ | async as monitor; else loading"
     >
       <thead>
         <tr>
@@ -29,21 +29,21 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let painel of painel">
-          <td>{{ painel.id }}</td>
-          <td>{{ painel.nome }}</td>
+        <tr *ngFor="let monitor of monitor">
+          <td>{{ monitor.id }}</td>
+          <td>{{ monitor.nome }}</td>
           <td>
             <span class="float-right">
               <button
                 class="btn btn-outline-warning mb-1 btn-sm"
-                (click)="editar(painel.id)"
+                (click)="irParaEdicao(monitor.id)"
               >
                 Editar
               </button>
 
               <button
                 class="btn btn-outline-danger mb-1 btn-sm"
-                (click)="excluir(painel)"
+                (click)="irParaExclusao(monitor)"
               >
                 Remover
               </button>

@@ -1,5 +1,5 @@
+import { monitorModel } from './monitor-model';
 import { environment } from './../../environments/environment';
-import { monitorModel } from './painel-administrativo-model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { take } from 'rxjs/operators';
