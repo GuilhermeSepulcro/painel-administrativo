@@ -23,12 +23,12 @@ export class ConfigurarComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const monitor = this.route.snapshot.data['monitor'];
+    const monitor = this.route.snapshot.params['monitor']
 
     this.form = this.fb.group({
-      id: [monitor.id],
+      id: this.route.snapshot.params['id'],
       nome: [
-        monitor.nome,
+        this.route.snapshot.params['nome'],
         [
           Validators.required,
           Validators.minLength(3),
