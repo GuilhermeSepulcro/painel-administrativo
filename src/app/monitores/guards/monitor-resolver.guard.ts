@@ -11,7 +11,7 @@ export class MonitorResolverGuard implements Resolve<monitorModel> {
 
   constructor(private service: MonitoresService){}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<monitorModel> {
 
     if(route.params && route.params['id']){
       return this.service.obterMonitorPorId(route.params['id'])
