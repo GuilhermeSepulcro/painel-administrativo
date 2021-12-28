@@ -33,7 +33,7 @@ export class MonitorService {
     return this.incluirMonitor(monitor)
   }
 
-  excluirMonitor(id: MonitorModel){
+  excluirMonitor(id: number){
     return this.http.delete(`${this.API}/${id}`);
   }
 

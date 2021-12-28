@@ -9,20 +9,12 @@
       "id": 2
     },
     {
-      "nome": "monitor 3",
-      "id": 3
+      "id": 3,
+      "nome": "Monitor 4"
     },
     {
-      "nome": "monitor 4",
-      "id": 4
-    },
-    {
-      "nome": "monitor 5",
-      "id": 5
-    },
-    {
-      "id": 6,
-      "nome": "xaxa"
+      "id": 4,
+      "nome": "Monitor 7"
     }
   ]
 }

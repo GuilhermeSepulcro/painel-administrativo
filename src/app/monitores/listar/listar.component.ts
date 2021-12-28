@@ -50,7 +50,7 @@ export class ListarComponent implements OnInit {
     );
   }
 
-  irParaEdicao(id: MonitorModel) {
+  irParaEdicao(id: number) {
     this.router.navigate(['editar', id], { relativeTo: this.route });
   }
 
@@ -71,23 +71,5 @@ export class ListarComponent implements OnInit {
         this.servicoDeAlerta.mostrarAlertaErro('Erro ao remover monitor. Tente novamente mais tarde.')
       }
     )
-  }
-
-  confirmarExclusao(){
-    this.service.excluirMonitor(this.monitorSelecionado.id)
-    .subscribe(
-      success => {
-        this.atualizar();
-        this.deleteModalRef.hide();
-      },
-      error => {
-        this.servicoDeAlerta.mostrarAlertaErro('Erro ao remover monitor. Tente novamente mais tarde.')
-        this.deleteModalRef.hide();
-      }
-    );
-  }
-
-  negarExclusao(){
-    this.deleteModalRef.hide();
   }
 }

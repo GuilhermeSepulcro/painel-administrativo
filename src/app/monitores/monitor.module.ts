@@ -3,7 +3,7 @@ import { ListarComponent } from './listar/listar.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MonitoresRoutingModule } from './monitores-routing.module';
+import { MonitorRoutingModule } from './monitor-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AlterarMonitorComponent } from './alterar-monitor/alterar-monitor.component';
 
@@ -16,8 +16,8 @@ import { AlterarMonitorComponent } from './alterar-monitor/alterar-monitor.compo
   ],
   imports: [
     CommonModule,
-    MonitoresRoutingModule,
+    MonitorRoutingModule,
     ReactiveFormsModule
   ]
 })
-export class MonitoresModule { }
+export class MonitorModule { }
