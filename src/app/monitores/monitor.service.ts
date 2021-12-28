@@ -1,4 +1,4 @@
-import { MonitorModel } from './monitor-model';
+import { MonitorAlterarModel, MonitorIncluirModel, MonitorLeituraModel } from './monitor-model';
 import { environment } from '../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
@@ -15,23 +15,25 @@ export class MonitorService {
   ) { }
 
   listarMonitoresAtivos(){
-    return this.http.get<MonitorModel[]>(this.API);
+    return this.http.get<MonitorLeituraModel[]>(this.API);
   }
 
-  incluirMonitor(monitor: MonitorModel){
+  incluirMonitor(monitor: MonitorIncluirModel){
     return this.http.post(this.API, monitor);
   }
 
-  atualizarMonitor(monitor: MonitorModel){
+  atualizarMonitor(monitor: MonitorAlterarModel){
     return this.http.put(`${this.API}/${monitor.id}`, monitor);
   }
 
-  salvarMonitor(monitor: MonitorModel){
+  alterarMonitor(monitor: MonitorAlterarModel){
     if(monitor.id){
       return this.atualizarMonitor(monitor);
     }
     return this.incluirMonitor(monitor)
   }
+
+
 
   excluirMonitor(id: number){
     return this.http.delete(`${this.API}/${id}`);

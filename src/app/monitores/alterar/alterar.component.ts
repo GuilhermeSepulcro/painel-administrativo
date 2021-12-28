@@ -1,5 +1,6 @@
-import { MonitorService } from './../monitor.service';
-import { AlertaModalService } from './../../shared/alerta-modal.service';
+import { MonitorIncluirModel, MonitorAlterarModel } from '../monitor-model';
+import { MonitorService } from '../monitor.service';
+import { AlertaModalService } from '../../shared/alerta-modal.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
@@ -7,10 +8,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-alterar-monitor',
-  templateUrl: './alterar-monitor.component.html',
+  templateUrl: './alterar.component.html',
   styleUrls: []
 })
-export class AlterarMonitorComponent implements OnInit {
+export class AlterarComponent implements OnInit {
 
   form!: FormGroup;
   formularioFoiEnviado = false;
@@ -45,27 +46,24 @@ export class AlterarMonitorComponent implements OnInit {
   }
 
   alterarMonitor() {
-    this.formularioFoiEnviado = true;
-    if (this.form.value.id) {
-      let mensagemSucesso = 'Monitor atualizado com sucesso!';
-      let mensagemErro = 'Erro ao atualizar monitor, tente novamente!';
+    const monitor = {
+      nome: this.form.value.nome
+    } as MonitorAlterarModel
 
-      this.service.salvarMonitor(this.form.value).subscribe(
+      this.service.alterarMonitor(monitor).subscribe(
         success => {
-          this.modal.mostrarAlertaSucesso(mensagemSucesso);
+          this.modal.mostrarAlertaSucesso('Monitor atualizado com sucesso!');
             this.location.back();
         },
         error => {
-          this.modal.mostrarAlertaErro(mensagemErro)
+          this.modal.mostrarAlertaErro(`Erro ao atualizar monitor: ${error}`)
         }
       );
     }
-  }
 
-  cancelar() {
-    this.formularioFoiEnviado = false;
-    this.form.reset();
+    cancelar() {
+      this.formularioFoiEnviado = false;
+      this.form.reset();
+    }
   }
-
-}
 

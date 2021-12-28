@@ -1,5 +1,5 @@
 import { AlertaModalService } from './../../shared/alerta-modal.service';
-import { MonitorModel } from '../monitor-model';
+import { MonitorLeituraModel } from '../monitor-model';
 import { MonitorService } from '../monitor.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { EMPTY, Observable, pipe, Subject } from 'rxjs';
@@ -18,10 +18,10 @@ export class ListarComponent implements OnInit {
   deleteModalRef!: BsModalRef;
   @ViewChild('deleteModal') deleteModal: any;
 
-  monitor$!: Observable<MonitorModel[]>;
+  monitor$!: Observable<MonitorLeituraModel[]>;
   error$ = new Subject<boolean>();
 
-  monitorSelecionado!: MonitorModel;
+  monitorSelecionado!: MonitorLeituraModel;
 
   constructor(
     private service: MonitorService,
@@ -54,7 +54,7 @@ export class ListarComponent implements OnInit {
     this.router.navigate(['editar', id], { relativeTo: this.route });
   }
 
-  irParaExclusao(monitor: MonitorModel){
+  irParaExclusao(monitor: MonitorLeituraModel){
     this.monitorSelecionado = monitor
 
     const resultado$ = this.servicoDeAlerta.mostrarConfirmacao('Confirmação', 'Tem certeza que deseja remover esse monitor?')

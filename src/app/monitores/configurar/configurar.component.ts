@@ -1,3 +1,4 @@
+import { MonitorIncluirModel } from './../monitor-model';
 import { AlertaModalService } from './../../shared/alerta-modal.service';
 import { MonitorService } from '../monitor.service';
 import { Component, OnInit } from '@angular/core';
@@ -44,29 +45,25 @@ export class ConfigurarComponent implements OnInit {
   }
 
   incluirMonitor() {
-    this.formularioFoiEnviado = true;
-    if (this.form.valid) {
+    const monitor = {
+      nome: this.form.value.nome
+    } as MonitorIncluirModel
 
-      this.estaEnviandoFormulario = true;
-
-      let mensagemSucesso = 'Monitor adicionado com sucesso!';
-      let mensagemErro = 'Erro ao adicionar monitor, tente novamente!';
-
-      this.service.salvarMonitor(this.form.value).subscribe(
+      this.service.incluirMonitor(monitor).subscribe(
         success => {
-          this.modal.mostrarAlertaSucesso(mensagemSucesso);
+          this.modal.mostrarAlertaSucesso('Monitor adicionado com sucesso!');
             this.location.back();
         },
         error => {
           this.estaEnviandoFormulario = false;
-          this.modal.mostrarAlertaErro(mensagemErro)
+          this.modal.mostrarAlertaErro(`Erro ao adicionar monitor: ${error}`)
         }
       );
     }
+
+    cancelar() {
+      this.formularioFoiEnviado = false;
+      this.form.reset();
+    }
   }
 
-  cancelar() {
-    this.formularioFoiEnviado = false;
-    this.form.reset();
-  }
-}
