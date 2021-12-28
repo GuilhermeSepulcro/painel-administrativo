@@ -1,29 +1,29 @@
+import { MonitorService } from './../monitor.service';
 import { AlertaModalService } from './../../shared/alerta-modal.service';
-import { MonitorService } from '../monitor.service';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-configuracao',
-  templateUrl: './configurar.component.html',
-  styleUrls: [],
+  selector: 'app-alterar-monitor',
+  templateUrl: './alterar-monitor.component.html',
+  styleUrls: []
 })
-export class ConfigurarComponent implements OnInit {
+export class AlterarMonitorComponent implements OnInit {
+
   form!: FormGroup;
   formularioFoiEnviado = false;
-  estaEnviandoFormulario = false;
 
   constructor(
     private fb: FormBuilder,
-    private service: MonitorService,
-    private modal: AlertaModalService,
     private location: Location,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private modal: AlertaModalService,
+    private service: MonitorService
+  ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     const monitor = this.route.snapshot.params['monitor']
 
     this.form = this.fb.group({
@@ -39,18 +39,16 @@ export class ConfigurarComponent implements OnInit {
     });
   }
 
+
   possuiError(field: string) {
     return this.form.get(field)?.errors;
   }
 
-  incluirMonitor() {
+  alterarMonitor() {
     this.formularioFoiEnviado = true;
-    if (this.form.valid) {
-
-      this.estaEnviandoFormulario = true;
-
-      let mensagemSucesso = 'Monitor adicionado com sucesso!';
-      let mensagemErro = 'Erro ao adicionar monitor, tente novamente!';
+    if (this.form.value.id) {
+      let mensagemSucesso = 'Monitor atualizado com sucesso!';
+      let mensagemErro = 'Erro ao atualizar monitor, tente novamente!';
 
       this.service.salvarMonitor(this.form.value).subscribe(
         success => {
@@ -58,7 +56,6 @@ export class ConfigurarComponent implements OnInit {
             this.location.back();
         },
         error => {
-          this.estaEnviandoFormulario = false;
           this.modal.mostrarAlertaErro(mensagemErro)
         }
       );
@@ -69,4 +66,6 @@ export class ConfigurarComponent implements OnInit {
     this.formularioFoiEnviado = false;
     this.form.reset();
   }
+
 }
+

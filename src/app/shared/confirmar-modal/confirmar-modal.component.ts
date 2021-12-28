@@ -14,7 +14,7 @@ export class ConfirmarModalComponent implements OnInit {
   @Input() mensagemAoCancelar = 'Cancelar';
   @Input() mensagemAoAceitar = 'Sim';
 
-  confirmarResultado: Subject<boolean>;
+  confirmarResultado!: Subject<boolean>;
 
   constructor(public bsModalRef: BsModalRef) { }
 

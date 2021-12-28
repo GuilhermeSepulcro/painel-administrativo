@@ -1,3 +1,4 @@
+import { AlterarMonitorComponent } from './alterar-monitor/alterar-monitor.component';
 import { ConfigurarComponent } from './configurar/configurar.component';
 import { ListarComponent } from './listar/listar.component';
 import { NgModule } from '@angular/core';
@@ -11,7 +12,7 @@ const routes: Routes = [
   },
   {
     path: 'editar/:id',
-    component: ConfigurarComponent
+    component: AlterarMonitorComponent
   },
 ];
 

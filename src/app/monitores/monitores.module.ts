@@ -5,12 +5,14 @@ import { CommonModule } from '@angular/common';
 
 import { MonitoresRoutingModule } from './monitores-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AlterarMonitorComponent } from './alterar-monitor/alterar-monitor.component';
 
 
 @NgModule({
   declarations: [
     ListarComponent,
-    ConfigurarComponent
+    ConfigurarComponent,
+    AlterarMonitorComponent
   ],
   imports: [
     CommonModule,

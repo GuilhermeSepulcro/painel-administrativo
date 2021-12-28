@@ -1,6 +1,6 @@
 import { AlertaModalService } from './../../shared/alerta-modal.service';
-import { monitorModel } from '../monitor-model';
-import { MonitoresService } from './../monitores.service';
+import { MonitorModel } from '../monitor-model';
+import { MonitorService } from '../monitor.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { EMPTY, Observable, pipe, Subject } from 'rxjs';
 import { catchError, switchMap, take } from 'rxjs/operators';
@@ -16,15 +16,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ListarComponent implements OnInit {
 
   deleteModalRef!: BsModalRef;
-  @ViewChild('deleteModal') deleteModal;
+  @ViewChild('deleteModal') deleteModal: any;
 
-  monitores$!: Observable<monitorModel[]>;
+  monitor$!: Observable<MonitorModel[]>;
   error$ = new Subject<boolean>();
 
-  monitorSelecionado!: monitorModel;
+  monitorSelecionado!: MonitorModel;
 
   constructor(
-    private service: MonitoresService,
+    private service: MonitorService,
     private modalService: BsModalService,
     private servicoDeAlerta: AlertaModalService,
     private router: Router,
@@ -36,7 +36,7 @@ export class ListarComponent implements OnInit {
   }
 
   atualizar() {
-    this.monitores$ = this.service.listarMonitoresAtivos().pipe(
+    this.monitor$ = this.service.listarMonitoresAtivos().pipe(
       catchError((error) => {
         this.tratarError();
         return EMPTY;
@@ -50,11 +50,11 @@ export class ListarComponent implements OnInit {
     );
   }
 
-  irParaEdicao(id) {
+  irParaEdicao(id: MonitorModel) {
     this.router.navigate(['editar', id], { relativeTo: this.route });
   }
 
-  irParaExclusao(monitor){
+  irParaExclusao(monitor: MonitorModel){
     this.monitorSelecionado = monitor
 
     const resultado$ = this.servicoDeAlerta.mostrarConfirmacao('Confirmação', 'Tem certeza que deseja remover esse monitor?')

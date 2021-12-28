@@ -1,4 +1,4 @@
-export class monitorModel{
-  id: number;
-  nome: string;
+export class MonitorModel{
+  id!: number;
+  nome!: string;
 }
