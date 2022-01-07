@@ -49,7 +49,7 @@ export class ConfigurarComponent implements OnInit {
       nome: this.form.value.nome
     } as MonitorIncluirModel
 
-      this.service.incluirMonitor(monitor).subscribe(
+      this.service.incluirMonitor(this.form.value).subscribe(
         success => {
           this.modal.mostrarAlertaSucesso('Monitor adicionado com sucesso!');
             this.location.back();

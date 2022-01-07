@@ -50,7 +50,7 @@ export class AlterarComponent implements OnInit {
       nome: this.form.value.nome
     } as MonitorAlterarModel
 
-      this.service.alterarMonitor(monitor).subscribe(
+      this.service.alterarMonitor(this.form.value).subscribe(
         success => {
           this.modal.mostrarAlertaSucesso('Monitor atualizado com sucesso!');
             this.location.back();
