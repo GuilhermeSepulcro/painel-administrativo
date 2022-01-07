@@ -36,7 +36,7 @@ export class ListarComponent implements OnInit {
   }
 
   atualizar() {
-    this.monitor$ = this.service.listarMonitoresAtivos().pipe(
+    this.monitor$ = this.service.obterMonitoresAtivos().pipe(
       catchError((error) => {
         this.tratarError();
         return EMPTY;

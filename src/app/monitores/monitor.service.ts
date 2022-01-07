@@ -14,7 +14,7 @@ export class MonitorService {
     private http: HttpClient
   ) { }
 
-  listarMonitoresAtivos(){
+  obterMonitoresAtivos(){
     return this.http.get<MonitorLeituraModel[]>(this.API);
   }
 
@@ -25,15 +25,6 @@ export class MonitorService {
   atualizarMonitor(monitor: MonitorAlterarModel){
     return this.http.put(`${this.API}/${monitor.id}`, monitor);
   }
-
-  alterarMonitor(monitor: MonitorAlterarModel){
-    if(monitor.id){
-      return this.atualizarMonitor(monitor);
-    }
-    return this.incluirMonitor(monitor)
-  }
-
-
 
   excluirMonitor(id: number){
     return this.http.delete(`${this.API}/${id}`);
