@@ -1,3 +1,4 @@
+import { MensageriaService } from './../../core/mensageria/mensageria.service';
 import { MonitorIncluirModel, MonitorAlterarModel } from '../monitor-model';
 import { MonitorService } from '../monitor.service';
 import { AlertaModalService } from '../../shared/alerta-modal.service';
@@ -21,7 +22,8 @@ export class AlterarComponent implements OnInit {
     private location: Location,
     private route: ActivatedRoute,
     private modal: AlertaModalService,
-    private service: MonitorService
+    private service: MonitorService,
+    private mensageriaService: MensageriaService
   ) { }
 
   ngOnInit(): void {
@@ -52,7 +54,7 @@ export class AlterarComponent implements OnInit {
 
       this.service.atualizarMonitor(this.form.value).subscribe(
         success => {
-          this.modal.mostrarAlertaSucesso('Monitor atualizado com sucesso!');
+          this.mensageriaService.mensagemSucesso('Monitor atualizado com sucesso!');
             this.location.back();
         },
         error => {
