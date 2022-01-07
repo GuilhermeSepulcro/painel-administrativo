@@ -1,4 +1,5 @@
-import { AlertaModalService } from './../../shared/alerta-modal.service';
+import { MensageriaService } from './../../core/mensageria/mensageria.service';
+// import { AlertaModalService } from './../../shared/alerta-modal.service';
 import { MonitorLeituraModel } from '../monitor-model';
 import { MonitorService } from '../monitor.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -26,9 +27,10 @@ export class ListarComponent implements OnInit {
   constructor(
     private service: MonitorService,
     private modalService: BsModalService,
-    private servicoDeAlerta: AlertaModalService,
+    // private servicoDeAlerta: AlertaModalService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private mensageriaService: MensageriaService
   ) {}
 
   ngOnInit() {
@@ -45,7 +47,7 @@ export class ListarComponent implements OnInit {
   }
 
   tratarError() {
-    this.servicoDeAlerta.mostrarAlertaErro(
+    this.mensageriaService.mensagemError(
       'Erro ao carregar monitores. Tente novamente mais tarde.'
     );
   }
@@ -55,21 +57,44 @@ export class ListarComponent implements OnInit {
   }
 
   irParaExclusao(monitor: MonitorLeituraModel){
-    this.monitorSelecionado = monitor
+    this.monitorSelecionado = monitor;
+    this.deleteModalRef = this.modalService.show(this.deleteModal, {class: 'modal-sm'});
 
-    const resultado$ = this.servicoDeAlerta.mostrarConfirmacao('Confirmação', 'Tem certeza que deseja remover esse monitor?')
-    resultado$.asObservable()
-    .pipe(
-      take(1),
-      switchMap(result => result ? this.service.excluirMonitor(monitor.id): EMPTY)
-    )
+
+    // this.monitorSelecionado = monitor
+
+    // const resultado$ = this.servicoDeAlerta.mostrarConfirmacao('Confirmação', 'Tem certeza que deseja remover esse monitor?')
+    // resultado$.asObservable()
+    // .pipe(
+    //   take(1),
+    //   switchMap(result => result ? this.service.excluirMonitor(monitor.id): EMPTY)
+    // )
+    // .subscribe(
+    //   success => {
+    //     this.atualizar();
+    //   },
+    //   error => {
+    //     this.servicoDeAlerta.mostrarAlertaErro('Erro ao remover monitor. Tente novamente mais tarde.')
+    //   }
+    // )
+  }
+
+  aoConfirmarExclusao(){
+    this.service.excluirMonitor(this.monitorSelecionado.id)
     .subscribe(
       success => {
         this.atualizar();
+        this.deleteModalRef.hide();
       },
       error => {
-        this.servicoDeAlerta.mostrarAlertaErro('Erro ao remover monitor. Tente novamente mais tarde.')
+        this.mensageriaService.mensagemError('Erro ao remover monitor. Tente novamente mais tarde.')
+        this.deleteModalRef.hide();
       }
-    )
+    );
   }
+
+  aoRecusarExclusao(){
+    this.deleteModalRef.hide();
+  }
+
 }

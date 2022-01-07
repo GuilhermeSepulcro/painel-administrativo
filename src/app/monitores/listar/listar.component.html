@@ -66,3 +66,11 @@
     </ng-template> -->
   </div>
 </div>
+
+<ng-template #deleteModal>
+  <div class="modal-body text-center">
+    <p>Tem certeza que deseja excluir esse monitor?</p>
+    <button type="button" class="btn btn-default" (click)="aoConfirmarExclusao()">Sim</button>
+    <button type="button" class="btn btn-primary" (click)="aoRecusarExclusao()">Não</button>
+  </div>
+</ng-template>

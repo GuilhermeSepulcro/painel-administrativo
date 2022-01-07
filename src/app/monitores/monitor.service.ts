@@ -1,3 +1,4 @@
+import { take } from 'rxjs/operators';
 import { MonitorAlterarModel, MonitorIncluirModel, MonitorLeituraModel } from './monitor-model';
 import { environment } from '../../environments/environment';
 import { Injectable } from '@angular/core';
@@ -27,7 +28,7 @@ export class MonitorService {
   }
 
   excluirMonitor(id: number){
-    return this.http.delete(`${this.API}/${id}`);
+    return this.http.delete(`${this.API}/${id}`).pipe(take(1));
   }
 
 }

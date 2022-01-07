@@ -1,5 +1,6 @@
+import { MensageriaService } from './../../core/mensageria/mensageria.service';
 import { MonitorIncluirModel } from './../monitor-model';
-import { AlertaModalService } from './../../shared/alerta-modal.service';
+// import { AlertaModalService } from './../../shared/alerta-modal.service';
 import { MonitorService } from '../monitor.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -19,9 +20,9 @@ export class ConfigurarComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private service: MonitorService,
-    private modal: AlertaModalService,
     private location: Location,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private mensageService: MensageriaService
   ) {}
 
   ngOnInit() {
@@ -51,12 +52,12 @@ export class ConfigurarComponent implements OnInit {
 
       this.service.incluirMonitor(this.form.value).subscribe(
         success => {
-          this.modal.mostrarAlertaSucesso('Monitor adicionado com sucesso!');
+          this.mensageService.mensagemSucesso('Monitor adicionado com sucesso!');
             this.location.back();
         },
         error => {
           this.estaEnviandoFormulario = false;
-          this.modal.mostrarAlertaErro(`Erro ao adicionar monitor: ${error}`)
+          this.mensageService.mensagemError(`Erro ao adicionar monitor: ${error}`)
         }
       );
     }

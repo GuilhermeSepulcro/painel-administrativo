@@ -1,7 +1,7 @@
 import { MensageriaService } from './../../core/mensageria/mensageria.service';
 import { MonitorIncluirModel, MonitorAlterarModel } from '../monitor-model';
 import { MonitorService } from '../monitor.service';
-import { AlertaModalService } from '../../shared/alerta-modal.service';
+// import { AlertaModalService } from '../../shared/alerta-modal.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
@@ -21,7 +21,7 @@ export class AlterarComponent implements OnInit {
     private fb: FormBuilder,
     private location: Location,
     private route: ActivatedRoute,
-    private modal: AlertaModalService,
+    // private modal: AlertaModalService,
     private service: MonitorService,
     private mensageriaService: MensageriaService
   ) { }
@@ -58,7 +58,7 @@ export class AlterarComponent implements OnInit {
             this.location.back();
         },
         error => {
-          this.modal.mostrarAlertaErro(`Erro ao atualizar monitor: ${error}`)
+          this.mensageriaService.mensagemError(`Erro ao atualizar monitor: ${error}`)
         }
       );
     }
