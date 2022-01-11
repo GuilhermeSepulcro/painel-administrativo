@@ -29,8 +29,7 @@ export class ListarComponent implements OnInit {
     private modalService: BsModalService,
     // private servicoDeAlerta: AlertaModalService,
     private router: Router,
-    private route: ActivatedRoute,
-    private mensageriaService: MensageriaService
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -38,18 +37,7 @@ export class ListarComponent implements OnInit {
   }
 
   atualizar() {
-    this.monitor$ = this.service.obterMonitoresAtivos().pipe(
-      catchError((error) => {
-        this.tratarError();
-        return EMPTY;
-      })
-    );
-  }
-
-  tratarError() {
-    this.mensageriaService.mensagemError(
-      'Erro ao carregar monitores. Tente novamente mais tarde.'
-    );
+    this.monitor$ = this.service.obterMonitoresAtivos()
   }
 
   irParaEdicao(id: number) {
@@ -87,7 +75,6 @@ export class ListarComponent implements OnInit {
         this.deleteModalRef.hide();
       },
       error => {
-        this.mensageriaService.mensagemError('Erro ao remover monitor. Tente novamente mais tarde.')
         this.deleteModalRef.hide();
       }
     );
