@@ -29,8 +29,7 @@ export class ListarComponent implements OnInit {
     private modalService: BsModalService,
     // private servicoDeAlerta: AlertaModalService,
     private router: Router,
-    private route: ActivatedRoute,
-    private mensageriaService: MensageriaService
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
