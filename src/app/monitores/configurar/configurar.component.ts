@@ -54,10 +54,6 @@ export class ConfigurarComponent implements OnInit {
         success => {
           this.mensageService.mensagemSucesso('Monitor adicionado com sucesso!');
             this.location.back();
-        },
-        error => {
-          this.estaEnviandoFormulario = false;
-          this.mensageService.mensagemError(`Erro ao adicionar monitor: ${error}`)
         }
       );
     }

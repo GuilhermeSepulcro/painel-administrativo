@@ -40,17 +40,11 @@ export class ListarComponent implements OnInit {
   atualizar() {
     this.monitor$ = this.service.obterMonitoresAtivos().pipe(
       catchError((error) => {
-        this.tratarError();
         return EMPTY;
       })
     );
   }
 
-  tratarError() {
-    this.mensageriaService.mensagemError(
-      'Erro ao carregar monitores. Tente novamente mais tarde.'
-    );
-  }
 
   irParaEdicao(id: number) {
     this.router.navigate(['editar', id], { relativeTo: this.route });
@@ -59,24 +53,6 @@ export class ListarComponent implements OnInit {
   irParaExclusao(monitor: MonitorLeituraModel){
     this.monitorSelecionado = monitor;
     this.deleteModalRef = this.modalService.show(this.deleteModal, {class: 'modal-sm'});
-
-
-    // this.monitorSelecionado = monitor
-
-    // const resultado$ = this.servicoDeAlerta.mostrarConfirmacao('Confirmação', 'Tem certeza que deseja remover esse monitor?')
-    // resultado$.asObservable()
-    // .pipe(
-    //   take(1),
-    //   switchMap(result => result ? this.service.excluirMonitor(monitor.id): EMPTY)
-    // )
-    // .subscribe(
-    //   success => {
-    //     this.atualizar();
-    //   },
-    //   error => {
-    //     this.servicoDeAlerta.mostrarAlertaErro('Erro ao remover monitor. Tente novamente mais tarde.')
-    //   }
-    // )
   }
 
   aoConfirmarExclusao(){
@@ -84,10 +60,6 @@ export class ListarComponent implements OnInit {
     .subscribe(
       success => {
         this.atualizar();
-        this.deleteModalRef.hide();
-      },
-      error => {
-        this.mensageriaService.mensagemError('Erro ao remover monitor. Tente novamente mais tarde.')
         this.deleteModalRef.hide();
       }
     );

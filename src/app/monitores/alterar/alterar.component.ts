@@ -56,9 +56,6 @@ export class AlterarComponent implements OnInit {
         success => {
           this.mensageriaService.mensagemSucesso('Monitor atualizado com sucesso!');
             this.location.back();
-        },
-        error => {
-          this.mensageriaService.mensagemError(`Erro ao atualizar monitor: ${error}`)
         }
       );
     }
